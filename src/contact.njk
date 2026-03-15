@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+title: Contact
+heroTitle: Contact the Class
+heroText: Reach out, ask a question, or sign up for email updates.
+description: Contact page for class communication.
+permalink: /contact/index.html
+---
+<section class="grid-two">
+  <article class="card">
+    <h2>Get in Touch</h2>
+    <form class="stacked-form" action="/api/contact" method="post" data-async-form>
+      <input class="visually-hidden" name="website" type="text" tabindex="-1" autocomplete="off">
+
+      <label for="contact-name">Name</label>
+      <input id="contact-name" name="name" type="text" placeholder="Your name" required>
+
+      <label for="contact-email">Email Address</label>
+      <input id="contact-email" name="email" type="email" placeholder="you@example.com" required>
+
+      <label for="contact-message">Message</label>
+      <textarea id="contact-message" name="message" rows="6" placeholder="How can we help?" required></textarea>
+
+      <button type="submit">Send Message</button>
+      <p class="form-status" data-form-status aria-live="polite"></p>
+    </form>
+  </article>
+  <article class="card">
+    <h2>Email Updates</h2>
+    <form class="stacked-form" action="/api/subscribe" method="post" data-async-form>
+      <input class="visually-hidden" name="website" type="text" tabindex="-1" autocomplete="off">
+
+      <label for="subscribe-email">Email Address</label>
+      <input id="subscribe-email" name="subscribe-email" type="email" placeholder="you@example.com" required>
+
+      <button type="submit">Subscribe</button>
+      <p class="form-status" data-form-status aria-live="polite"></p>
+    </form>
+    <p class="note">Contact messages and email update signups are saved securely in the class site database and can sync to Google Sheets.</p>
+  </article>
+</section>

@@ -1,0 +1,6 @@
+# Ignore large video uploads in the gallery folder
+src/images/gallery/**/*.avi
+src/images/gallery/**/*.mp4
+src/images/gallery/**/*.mov
+src/images/gallery/**/*.mkv
+src/images/gallery/**/*.wmv

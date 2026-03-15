@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | {{ site.title }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <link rel="stylesheet" href="/assets/style.css?v=20260313">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <h1>{{ heroTitle or title }}</h1>
+      {% if heroText %}
+        <p class="hero__text">{{ heroText }}</p>
+      {% endif %}
+    </div>
+  </header>
+
+  {% include "partials/nav.njk" %}
+
+  <main class="page-shell">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <p>Grass Roots Class</p>
+  </footer>
+
+  <script src="/assets/script.js?v=20260313"></script>
+</body>
+</html>

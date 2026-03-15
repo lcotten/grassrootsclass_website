@@ -1,0 +1,13 @@
+name = "grassroots-contact-mailer"
+main = "src/index.js"
+compatibility_date = "2026-03-09"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[[send_email]]
+name = "OUTBOUND_EMAIL"
+destination_address = "membership@grassrootsclass.com"
+
+[vars]
+NOTIFY_EMAIL = "membership@grassrootsclass.com"
+CONTACT_SENDER = "no-reply@grassrootsclass.com"

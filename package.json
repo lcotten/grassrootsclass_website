@@ -1,0 +1,18 @@
+{
+  "name": "grassroots-class-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static Sunday school class website built with Eleventy.",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "optimize:gallery": "node scripts/optimize-gallery.js"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  },
+  "dependencies": {
+    "mimetext": "^3.0.28",
+    "sharp": "^0.34.1"
+  }
+}

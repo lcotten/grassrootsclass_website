@@ -1,0 +1,15 @@
+node_modules/
+_site/
+.dev.vars
+.cf-tools/
+.wrangler/
+
+
+# Sensitive credentials
+client_secret_*.json
+GrassRootsClass Google Account OAuth Client information.docx
+scripts/
+
+# Local assets
+downloads/
+temp/

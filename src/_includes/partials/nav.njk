@@ -1,0 +1,5 @@
+<nav class="site-nav" aria-label="Main navigation">
+  {% for item in site.nav %}
+    <a href="{{ item.url }}" {% if page.url == item.url %}aria-current="page"{% endif %}>{{ item.label }}</a>
+  {% endfor %}
+</nav>

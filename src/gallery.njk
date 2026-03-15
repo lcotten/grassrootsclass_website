@@ -1,0 +1,44 @@
+---
+layout: layouts/base.njk
+title: Gallery
+heroTitle: Class Fellowship Gallery
+heroText: Photos from class fellowship gatherings and shared events.
+description: Fellowship photo gallery for the class.
+permalink: /gallery/index.html
+---
+<section class="card-stack">
+  <p class="note protected-hint-note">Please enter the Class Password.  Hint: It is the first 3 words of the benediction used at the end of each class (no spaces and all lower case)</p>
+  <article
+    class="card protected"
+    data-protected="true"
+    data-protected-title="Gallery"
+    data-protected-hint="Please enter the Class Password.  Hint: It is the first 3 words of the benediction used at the end of each class (no spaces and all lower case)"
+    data-protected-password="maythelord"
+  >
+    <div class="protected__content">
+      <article class="card">
+        <h2>Class Video</h2>
+        <div class="embed-frame">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/hZDpfbRb-ng?start=66"
+            title="Class video"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </article>
+      <h2>Class Fellowship Photos</h2>
+      {% if gallery and gallery.length %}
+        <div class="gallery">
+          {% for photo in gallery %}
+            <img src="{{ photo.url }}" alt="{{ photo.alt }}" loading="lazy" decoding="async">
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="note">No photos yet. Add images to <code>src/images/gallery</code>, run the optimizer, and redeploy.</p>
+      {% endif %}
+    </div>
+  </article>
+</section>
