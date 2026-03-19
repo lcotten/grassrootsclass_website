@@ -32,25 +32,51 @@ async function handleAsyncFormSubmit(event) {
     submitButton.textContent = "Sending...";
   }
 
-  try {
-    const response = await fetch(form.action, {
-      method: form.method || "POST",
-      body: new FormData(form),
-      headers: {
-        Accept: "application/json",
-        "X-Requested-With": "fetch"
-      }
-    });
-
-    const payload = await response.json();
-
-    if (!response.ok || !payload.ok) {
-      throw new Error(payload.message || "Something went wrong. Please try again.");
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = originalLabel;
     }
+    return;
+  }
 
-    setFormStatus(statusNode, "success", payload.message || "Thanks. Your form was submitted.");
-    form.reset();
-  } catch (error) {
+  try {
+      const response = await fetch(form.action, {
+        method: form.method || "POST",
+        body: new FormData(form),
+        headers: {
+          Accept: "application/json",
+          "X-Requested-With": "fetch"
+        }
+      });
+
+      const contentType = response.headers.get("content-type") || "";
+      const isJson = contentType.includes("application/json");
+      const isLocalPreview =
+        window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      let payload = null;
+
+      if (isJson) {
+        payload = await response.json();
+      } else {
+        await response.text();
+      }
+
+      if (!response.ok || (payload && !payload.ok)) {
+        const fallback = isLocalPreview
+          ? "Forms are disabled in the local preview. Please test on the live website."
+          : "Something went wrong. Please try again.";
+        throw new Error((payload && payload.message) || fallback);
+      }
+
+      setFormStatus(
+        statusNode,
+        "success",
+        (payload && payload.message) || "Thanks. Your form was submitted."
+      );
+      form.reset();
+    } catch (error) {
     setFormStatus(
       statusNode,
       "error",
@@ -67,6 +93,29 @@ async function handleAsyncFormSubmit(event) {
 for (const form of document.querySelectorAll("[data-async-form]")) {
   form.addEventListener("submit", handleAsyncFormSubmit);
 }
+
+function initPhoneValidation() {
+  const phoneInputs = document.querySelectorAll('input[type="tel"][name="phone"]');
+  const phonePattern = /^(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
+
+  for (const input of phoneInputs) {
+    input.addEventListener("input", () => {
+      const value = String(input.value || "").trim();
+      if (!value) {
+        input.setCustomValidity("");
+        return;
+      }
+
+      if (!phonePattern.test(value)) {
+        input.setCustomValidity("Please enter a valid 10-digit U.S. phone number.");
+      } else {
+        input.setCustomValidity("");
+      }
+    });
+  }
+}
+
+initPhoneValidation();
 
 function initProtectedAreas() {
   const protectedAreas = document.querySelectorAll("[data-protected=\"true\"]");
@@ -100,8 +149,10 @@ function initProtectedAreas() {
         <p class="protected__hint">${hint}</p>
         <form class="stacked-form" data-protected-form>
           <label for="protected-password-${storageKey}">Password</label>
-          <input id="protected-password-${storageKey}" type="password" autocomplete="current-password" placeholder="Password" required>
-          <button type="submit">Unlock</button>
+          <div class="protected__row">
+            <input id="protected-password-${storageKey}" type="text" autocomplete="current-password" placeholder="Password" required>
+            <button type="submit" class="protected__submit">Unlock</button>
+          </div>
           <p class="protected__error" data-protected-error role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -113,8 +164,7 @@ function initProtectedAreas() {
     const hintNode = overlay.querySelector(".protected__hint");
     const pageHint = area.closest(".card-stack")?.querySelector(".protected-hint-note");
     const baseHint = hint;
-    const wrongHint = "Wrong Password Entered.  Please enter the Class Password. Hint: It is the first 3 words of the benediction used at the end of each class (no spaces and all lower case)";
-
+    const wrongHint = "Wrong Password Entered.  Please enter the Class Password. Hint: It is the first 3 words of the scripture spoken at the end of each class (no spaces and all lower case)";
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const entered = String(input.value || "").trim().toLowerCase();
@@ -150,4 +200,3 @@ function initProtectedAreas() {
 }
 
 initProtectedAreas();
-

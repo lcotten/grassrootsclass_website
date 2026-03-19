@@ -113,6 +113,8 @@ export async function ensureSchema(db) {
     .prepare(`
       CREATE TABLE IF NOT EXISTS newsletter_signups (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        first_name TEXT,
+        last_name TEXT,
         email TEXT NOT NULL UNIQUE,
         source TEXT NOT NULL DEFAULT 'website',
         google_sheets_status TEXT NOT NULL DEFAULT 'pending',
@@ -147,6 +149,8 @@ export async function ensureSchema(db) {
   ]);
 
   await ensureColumns(db, "newsletter_signups", [
+    { name: "first_name", definition: "first_name TEXT" },
+    { name: "last_name", definition: "last_name TEXT" },
     { name: "google_sheets_status", definition: "google_sheets_status TEXT NOT NULL DEFAULT 'pending'" },
     { name: "google_sheets_error", definition: "google_sheets_error TEXT" },
     { name: "google_sheets_synced_at", definition: "google_sheets_synced_at TEXT" }

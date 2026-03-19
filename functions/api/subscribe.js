@@ -46,7 +46,17 @@ export async function onRequestPost(context) {
       return redirectToContact(request, { subscribe: "success" });
     }
 
+    const firstName = cleanLine(form.get("first-name"), 120);
+    const lastName = cleanLine(form.get("last-name"), 120);
     const email = normalizeEmail(form.get("subscribe-email"));
+
+    if (!firstName) {
+      return invalid(request, "Please enter your first name.");
+    }
+
+    if (!lastName) {
+      return invalid(request, "Please enter your last name.");
+    }
 
     if (!isValidEmail(email)) {
       return invalid(request, "Please enter a valid email address.");
@@ -70,18 +80,18 @@ export async function onRequestPost(context) {
       await env.SITE_DATA
         .prepare(`
           UPDATE newsletter_signups
-          SET updated_at = ?
+          SET first_name = ?, last_name = ?, updated_at = ?
           WHERE id = ?
         `)
-        .bind(timestamp, signupId)
+        .bind(firstName, lastName, timestamp, signupId)
         .run();
     } else {
       const insertResult = await env.SITE_DATA
         .prepare(`
-          INSERT INTO newsletter_signups (email, source, subscribed_at, updated_at)
-          VALUES (?, 'website', ?, ?)
+          INSERT INTO newsletter_signups (first_name, last_name, email, source, subscribed_at, updated_at)
+          VALUES (?, ?, ?, 'website', ?, ?)
         `)
-        .bind(email, subscribedAt, timestamp)
+        .bind(firstName, lastName, email, subscribedAt, timestamp)
         .run();
       signupId = insertResult.meta?.last_row_id;
     }
@@ -99,6 +109,8 @@ export async function onRequestPost(context) {
           },
           body: JSON.stringify({
             type: "subscribe",
+            firstName,
+            lastName,
             email,
             submittedAt: subscribedAt
           })
@@ -120,6 +132,8 @@ export async function onRequestPost(context) {
     if (signupId && googleSheetsStatus !== "sent") {
       const googleSheetsResult = await syncNewsletterSignupToGoogleSheets(env, {
         subscribedAt,
+        firstName,
+        lastName,
         email,
         source: "website"
       });

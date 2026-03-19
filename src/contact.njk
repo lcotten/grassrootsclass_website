@@ -26,9 +26,15 @@ permalink: /contact/index.html
     </form>
   </article>
   <article class="card">
-    <h2>Email Updates</h2>
+    <h2>Subscribe to the Grass Roots Newsletter</h2>
     <form class="stacked-form" action="/api/subscribe" method="post" data-async-form>
       <input class="visually-hidden" name="website" type="text" tabindex="-1" autocomplete="off">
+
+      <label for="subscribe-first-name">First Name</label>
+      <input id="subscribe-first-name" name="first-name" type="text" placeholder="First name" autocomplete="given-name" required>
+
+      <label for="subscribe-last-name">Last Name</label>
+      <input id="subscribe-last-name" name="last-name" type="text" placeholder="Last name" autocomplete="family-name" required>
 
       <label for="subscribe-email">Email Address</label>
       <input id="subscribe-email" name="subscribe-email" type="email" placeholder="you@example.com" required>
@@ -36,6 +42,5 @@ permalink: /contact/index.html
       <button type="submit">Subscribe</button>
       <p class="form-status" data-form-status aria-live="polite"></p>
     </form>
-    <p class="note">Contact messages and email update signups are saved securely in the class site database and can sync to Google Sheets.</p>
   </article>
 </section>

@@ -263,6 +263,14 @@ button:disabled {
   border: 0;
 }
 
+.embed-frame--tall {
+  padding-top: 240%;
+}
+
+.embed-frame--sheet {
+  padding-top: 320%;
+}
+
 .note {
   color: var(--muted);
   line-height: 1.6;
@@ -309,6 +317,24 @@ button:disabled {
 
 .protected__panel input::placeholder {
   color: var(--muted);
+}
+
+.protected__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.protected__row input {
+  flex: 1 1 220px;
+  margin-bottom: 0;
+}
+
+.protected__submit {
+  flex: 0 0 auto;
+  padding: 0.65rem 1.4rem;
 }
 
 .protected-hint-note {
@@ -383,6 +409,10 @@ button:disabled {
   .hero {
     padding-top: 3rem;
   }
+
+  .embed-frame--sheet {
+    padding-top: 480%;
+  }
 }
 
 .calendar-table-wrap {
@@ -445,6 +475,7 @@ button:disabled {
 .checklist-list li {
   margin-bottom: 0.25rem;
 }
+
 
 
 

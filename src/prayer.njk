@@ -19,7 +19,14 @@ permalink: /prayer/index.html
       <input id="prayer-email" name="email" type="email" placeholder="you@example.com">
 
       <label for="prayer-phone">Phone Number (optional)</label>
-      <input id="prayer-phone" name="phone" type="tel" placeholder="(555) 555-5555">
+      <input
+        id="prayer-phone"
+        name="phone"
+        type="tel"
+        placeholder="(555) 555-5555"
+        pattern="^(?:\\(\\d{3}\\)|\\d{3})[\\s.-]?\\d{3}[\\s.-]?\\d{4}$"
+        title="Enter a valid 10-digit US phone number (example: 5555555555 or (555) 555-5555)."
+      >
 
       <label for="prayer-request">Prayer Request</label>
       <textarea id="prayer-request" name="request" rows="6" placeholder="How can we pray for you?" required></textarea>
@@ -27,6 +34,5 @@ permalink: /prayer/index.html
       <button type="submit">Submit</button>
       <p class="form-status" data-form-status aria-live="polite"></p>
     </form>
-    <p class="note">Prayer requests are saved securely and can sync to the class Google Sheet.</p>
   </article>
 </section>

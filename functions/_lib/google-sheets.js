@@ -228,6 +228,8 @@ export async function syncNewsletterSignupToGoogleSheets(env, signup) {
 
   return syncRow(env, sheetName, [
     signup.subscribedAt,
+    signup.firstName,
+    signup.lastName,
     signup.email,
     signup.source
   ]);
