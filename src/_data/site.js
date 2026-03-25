@@ -6,7 +6,7 @@ module.exports = {
     { label: "About", url: "/about/" },
     { label: "Service", url: "/service/" },
     { label: "Gallery", url: "/gallery/" },
-    { label: "Calendar", url: "/calendar/" },
+    { label: "Events", url: "/calendar/" },
     { label: "Lessons", url: "/lessons/" },
     { label: "Leadership", url: "/leadership/" },
     { label: "Membership Roster", url: "/membership-roster/" },

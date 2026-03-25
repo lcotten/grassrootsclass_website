@@ -94,6 +94,36 @@ for (const form of document.querySelectorAll("[data-async-form]")) {
   form.addEventListener("submit", handleAsyncFormSubmit);
 }
 
+function initNavToggle() {
+  const nav = document.querySelector(".site-nav");
+  if (!nav) {
+    return;
+  }
+
+  const toggle = nav.querySelector(".site-nav__toggle");
+  const links = nav.querySelector(".site-nav__links");
+
+  if (!toggle || !links) {
+    return;
+  }
+
+  nav.classList.add("site-nav--ready");
+
+  toggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("site-nav--open");
+    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  for (const link of links.querySelectorAll("a")) {
+    link.addEventListener("click", () => {
+      nav.classList.remove("site-nav--open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
+  }
+}
+
+initNavToggle();
+
 function initPhoneValidation() {
   const phoneInputs = document.querySelectorAll('input[type="tel"][name="phone"]');
   const phonePattern = /^(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;

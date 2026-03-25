@@ -13,3 +13,7 @@ scripts/
 # Local assets
 downloads/
 temp/
+
+# Gallery images (keep placeholder)
+src/images/gallery/*
+!src/images/gallery/.gitkeep
