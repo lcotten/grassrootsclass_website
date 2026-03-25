@@ -310,17 +310,51 @@ button:disabled {
   border: 0;
 }
 
+.embed-frame--lessons iframe {
+  top: -42px;
+  height: calc(100% + 42px);
+}
+
+.embed-frame--membership iframe {
+  top: -24px;
+  height: calc(100% + 24px);
+}
+
 .embed-frame--tall {
   padding-top: 240%;
 }
 
 .embed-frame--service {
-  padding-top: 240%;
+  padding-top: 276%;
+}
+
+.embed-frame--service iframe {
+  top: -24px;
+  height: calc(100% + 24px);
 }
 
 .service-events-card {
   width: 33.3333%;
   margin: 0 auto;
+}
+
+.lesson-schedule-card {
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+.leadership-card {
+  width: 33.3333%;
+  margin: 0 auto;
+}
+
+.embed-frame--leadership {
+  padding-top: 192%;
+}
+
+.embed-frame--leadership iframe {
+  top: -42px;
+  height: calc(100% + 42px);
 }
 
 .embed-frame--sheet {
@@ -490,6 +524,14 @@ button:disabled {
 
   .embed-frame--service {
     padding-top: 360%;
+  }
+
+  .leadership-card {
+    width: 100%;
+  }
+
+  .embed-frame--leadership {
+    padding-top: 900%;
   }
 
   .embed-frame--sheet {

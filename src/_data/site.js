@@ -4,9 +4,8 @@ module.exports = {
   nav: [
     { label: "Home", url: "/" },
     { label: "About", url: "/about/" },
-    { label: "Service", url: "/service/" },
     { label: "Gallery", url: "/gallery/" },
-    { label: "Events", url: "/calendar/" },
+    { label: "Service and Social", url: "/service-and-social/" },
     { label: "Lessons", url: "/lessons/" },
     { label: "Leadership", url: "/leadership/" },
     { label: "Membership Roster", url: "/membership-roster/" },
